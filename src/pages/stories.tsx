@@ -54,6 +54,7 @@ const StoriesPage = withContextProvider(
         )}
 
         <StoriesSection
+          canDisplayActions={isAuthenticated}
           lastStories={context.latest}
           editorStories={context.editorPicks}
           markAsFeatured={markAsFeatured}

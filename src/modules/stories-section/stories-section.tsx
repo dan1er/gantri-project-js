@@ -6,6 +6,7 @@ import { CardAction } from '../card/card.styles'
 import { StoriesRow, StoriesSectionContainer } from './stories-section.styles'
 
 export interface StoriesSectionProps {
+  canDisplayActions: boolean
   lastStories: Story[]
   editorStories: Story[]
   markAsFeatured: (storyId: string) => void
@@ -27,9 +28,11 @@ export const StoriesSection = memo((props: StoriesSectionProps) => {
                 title={story.title}
                 username={story.username}
                 actions={
-                  <CardAction onClick={() => props.deleteFeatured(story.id)}>
-                    Delete
-                  </CardAction>
+                  props.canDisplayActions && (
+                    <CardAction onClick={() => props.deleteFeatured(story.id)}>
+                      Delete
+                    </CardAction>
+                  )
                 }
               />
             ))}
@@ -47,14 +50,16 @@ export const StoriesSection = memo((props: StoriesSectionProps) => {
               title={story.title}
               username={story.username}
               actions={
-                <>
-                  <CardAction onClick={() => props.markAsFeatured(story.id)}>
-                    Feature
-                  </CardAction>
-                  <CardAction onClick={() => props.deleteStory(story.id)}>
-                    Delete
-                  </CardAction>
-                </>
+                props.canDisplayActions && (
+                  <>
+                    <CardAction onClick={() => props.markAsFeatured(story.id)}>
+                      Feature
+                    </CardAction>
+                    <CardAction onClick={() => props.deleteStory(story.id)}>
+                      Delete
+                    </CardAction>
+                  </>
+                )
               }
             />
           ))}
