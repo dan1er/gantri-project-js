@@ -15,7 +15,7 @@ export interface AuthState {
   userInfo?: User
 }
 
-const AuthStateContext = React.createContext<any>({
+const AuthStateContext = React.createContext<AuthState>({
   popupVisible: false,
   userInfo: undefined,
 })
